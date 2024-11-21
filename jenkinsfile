@@ -1,0 +1,21 @@
+pipeline {
+    // Budowanie na dowlnym agencie
+    agent { label 'jenkins' }
+    // Stages
+    stages {
+        stage('Pogoda') {
+            steps {
+                script {
+                    sh '''
+                        bash ./start.sh "Warszawa"
+                    '''
+                }
+            }
+        }
+    }
+    post {
+      always {
+        cleanWs()
+      }
+    }
+}
